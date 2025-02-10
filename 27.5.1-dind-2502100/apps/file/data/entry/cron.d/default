@@ -1,0 +1,10 @@
+# shellcheck disable=SC2148
+# shellcheck disable=SC2035
+# shellcheck disable=SC2211
+# 目录 /etc/cron.d 链接到了这个目录, 可以直接在这个文件夹下添加定时任务文件
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# * * * * * root date >>/cron_test.log
+
+# 每 10分钟, 检查一次 关闭 vscode-server 已运一小时, 而且没有客户端客连接的 vscode-server 进程
+*/10 * * * * root base64 -d <<<X19raWxsX3ZzY29kZV9zZXJ2ZXIgKCkgewoJaWYgW1sgJChwcyAtZWYgfCBncmVwIC12ICQkIHwgZ3JlcCAndHlwZT1maWxlV2F0Y2hlciQnIC1jKSA9PSAnMCcgXV0KCXRoZW4KCQlfbGFzdF9waWQ9JChwcyAtZWYgfCBncmVwICd2c2NvZGUtc2VydmVyLipub2RlXHMnIC1FIHwgYXdrICd7cHJpbnQgJDJ9JyB8IHNvcnQgfCB0YWMgfCBoZWFkIC1uMSkgCgkJX2V0aW1lcz0kKHBzIC1wICIkX2xhc3RfcGlkIiAtbyBldGltZXM9IHwgZ3JlcCAnWzAtOV17MSw5fScgLUVvKSAKCQlpZiAoKF9ldGltZXMgPiAzNjAwKSkKCQl0aGVuCgkJCXBraWxsIC1mICcjIFdhdGNofHZzY29kZS1zZXJ2ZXInCgkJZmkKCWZpCn0KX19raWxsX3ZzY29kZV9zZXJ2ZXIK | bash
