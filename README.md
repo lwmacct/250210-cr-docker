@@ -15,7 +15,7 @@ __main() {
 
   {
     # 镜像准备
-    _image1="registry.cn-hangzhou.aliyuncs.com/lwmacct/docker:27.5.0-dind-2501190"
+    _image1="ghcr.io/lwmacct/250210-cr-docker:27.5.1-dind-2502100"
     _image2="$(docker images -q $_image1)"
     if [[ "$_image2" == "" ]]; then
       docker pull $_image1
@@ -42,8 +42,7 @@ services:
     networks:
       dind:
         ipv4_address: "$_pro_ip"
-    devices:
-      - /dev/random:/dev/random:r
+    # devices:
       # - /dev/net/tun:/dev/net/tun:rwm
       # - /dev/vhost-net:/dev/vhost-net:rwm
     volumes:
