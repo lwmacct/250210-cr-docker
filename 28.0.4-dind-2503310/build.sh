@@ -92,7 +92,7 @@ __help() {
     cat >/dev/null <<"EOF"
 这里可以写一些备注
 
-ghcr.io/lwmacct/250210-cr-docker:28.0.0-dind-2502210
+ghcr.io/lwmacct/250210-cr-docker:28.0.4-dind-2503310
 
 EOF
 }
