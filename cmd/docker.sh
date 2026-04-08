@@ -3,7 +3,6 @@
 __main() {
 
 	{
-		# 镜像准备, 不再发布包含日期的版本, 需自行定期 pull
 		_proxy="ghcr.nju.edu.cn/"
 		_proxy="1181.s.kuaicdn.cn:11818/"
 		_image1="${_proxy}ghcr.io/lwmacct/250210-cr-docker:29.4.0-dind-260408"

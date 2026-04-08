@@ -1,17 +1,44 @@
 # 本地环境
-**/.local/*
-**/.venv/*
-**/.conda/*
-**/.taskfile/.env
+**/.DS_Store
+**/.local/
+**/.venv/
+**/.conda/
+**/.task/remote/
+
+# node_modules
+**/node_modules/
+**/tsconfig.tsbuildinfo
+
+# 构建输出
+**/bin/
+**/dist/
+**/build/
+**/*.vsix
+
+# 临时文件
+**/*.bak
+**/*.log
+**/*.tmp
+**/*.out
+**/*.temp
+**/*.cache
 
 # 临时目录
-**/tmp/**
-**/log/**
-**/logs/**
-**/temp/**
-**/cache/**
-**/.DS_Store
+tmp/**
+log/**
+logs/**
+temp/**
+cache/**
 
-# 构建产物
-**/dist/**
-**/build/**
+# 生成文件
+gen/
+
+# secret files
+.env
+.env.*
+!.env.example
+config/config.yaml
+
+# AI tools
+.claude
+.playwright-mcp
