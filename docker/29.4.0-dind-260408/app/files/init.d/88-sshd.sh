@@ -23,9 +23,13 @@ command=/usr/sbin/sshd -D
 priority=999
 autostart=true
 autorestart=true
-stderr_logfile=/data/entry/logs/sshd_err.log
-stdout_logfile=/data/entry/logs/sshd_out.log
-
+startretries=3
+user=root
+redirect_stderr=true
+stdout_logfile=/data/entry/logs/sshd.log
+stdout_logfile_maxbytes=50MB
+stdout_logfile_backups=10
+environment=TERM="xterm"
 EOF
 }
 __main() {

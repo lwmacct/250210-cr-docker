@@ -9,8 +9,13 @@ command=/usr/local/bin/dockerd-entrypoint.sh --exec-opt native.cgroupdriver=cgro
 priority=999
 autostart=true
 autorestart=true
-stdout_logfile=/data/entry/logs/docker_out.log
-stderr_logfile=/data/entry/logs/docker_err.log
+startretries=3
+user=root
+redirect_stderr=true
+stdout_logfile=/data/entry/logs/docker.log
+stdout_logfile_maxbytes=50MB
+stdout_logfile_backups=10
+environment=TERM="xterm"
 EOF
 
 }
