@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 __main() {
-	_file="/data/entry/supervisor.d/docker.conf"
+	_file="/etc/supervisor.d/docker.conf"
 	mkdir -p ${_file%/*}
 	cat >$_file <<EOF
 [program:docker]

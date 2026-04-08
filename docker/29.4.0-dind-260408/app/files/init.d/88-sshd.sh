@@ -15,7 +15,7 @@ EOF
 }
 
 __supervisor() {
-	_file="/data/entry/supervisor.d/sshd.conf"
+	_file="/etc/supervisor.d/sshd.conf"
 	mkdir -p ${_file%/*}
 	cat >$_file <<EOF
 [program:sshd]

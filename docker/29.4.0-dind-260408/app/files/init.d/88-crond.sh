@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 __main() {
-	_file="/data/entry/supervisor.d/crond.conf"
+	_file="/etc/supervisor.d/crond.conf"
 	mkdir -p ${_file%/*}
 	cat >$_file <<EOF
 [program:crond]

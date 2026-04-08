@@ -5,11 +5,8 @@ __release() {
 	: # 释放资源
 
 	{
-		{
-			: # 初始化文件
-			mkdir -p /data/entry/{,logs,scripts,cron.d,supervisor.d}
-			tar -vcpf - -C /app/free . | (cd / && tar -xpf - --skip-old-files)
-		}
+		mkdir -p /data/entry/{,logs,cron.d}
+		tar -vcpf - -C /app/free . | (cd / && tar -xpf - --skip-old-files)
 
 		{
 			echo "start init"
@@ -49,7 +46,7 @@ prompt=mysupervisor
 history_file=~/.sc_history
 
 [include]
-files = /etc/supervisor/conf.d/*.conf /data/entry/supervisor.d/*.conf /app/files/supervisor.d/*.conf
+files = /etc/supervisor.d/*.conf /data/entry/supervisor.d/*.conf /app/files/supervisor.d/*.conf
 EOF
 }
 
