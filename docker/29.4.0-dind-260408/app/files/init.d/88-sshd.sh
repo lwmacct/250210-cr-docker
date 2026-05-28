@@ -36,6 +36,10 @@ __main() {
 	ssh-keygen -A
 	_file_pwd="/data/entry/sshd/password"
 	mkdir -p ${_file_pwd%/*}
+	touch /data/entry/sshd/authorized_keys
+	chmod 700 /data/entry/sshd
+	chmod 600 /data/entry/sshd/authorized_keys
+
 	_password=$(cat "$_file_pwd" 2>/dev/null)
 	if [[ -z "$_password" ]]; then
 		_password=$(cat /proc/sys/kernel/random/uuid)

@@ -1,1 +1,0 @@
-/app/files/init.d/00-init.sh

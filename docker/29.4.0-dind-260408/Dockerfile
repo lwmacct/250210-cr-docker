@@ -21,10 +21,11 @@ RUN set -eux; \
     apk del npm;
 
 RUN set -eux; \
-    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime; \
     rm -rf /etc/cron.d/; \
-    ln -sf /data/entry/cron.d/ /etc/cron.d; \
-    ln -sf /bin/bash /bin/sh; \
+    ln -sfn /data/entry/cron.d/ /etc/cron.d; \
+    ln -sfn /usr/share/zoneinfo/Asia/Shanghai /etc/localtime; \
+    ln -sfn /bin/bash /bin/sh; \
+    ln -sfn /data/entry/sshd /root/.ssh; \
     mkdir -p /etc/supervisor.d; \
     cat /etc/supervisord.conf > /etc/supervisord.conf.bak; \
     chmod -x /usr/sbin/zfs; \
