@@ -2,28 +2,28 @@
 # author https://github.com/lwmacct
 
 __release() {
-	: # 释放资源
+  : # 释放资源
 
-	{
-		mkdir -p /data/entry/{,logs,cron.d}
-		tar -vcpf - -C /app/free . | (cd / && tar -xpf - --skip-old-files)
+  {
+    mkdir -p /data/entry/{,logs,cron.d}
+    tar -vcpf - -C /app/free . | (cd / && tar -xpf - --skip-old-files)
 
-		{
-			echo "start init"
-			for _script in /data/entry/init.d/*.sh; do
-				if [ -r "$_script" ]; then
-					echo "Run $_script"
-					timeout 15 bash "$_script"
-				fi
-			done
-		}
+    {
+      echo "start init"
+      for _script in /data/entry/init.d/*.sh; do
+        if [ -r "$_script" ]; then
+          echo "Run $_script"
+          timeout 15 bash "$_script"
+        fi
+      done
+    }
 
-	} 2>&1 | tee -a /var/log/entry.log
+  } 2>&1 | tee -a /var/log/entry.log
 }
 
 __supervisord() {
 
-	cat >/etc/supervisord.conf <<EOF
+  cat >/etc/supervisord.conf <<EOF
 [unix_http_server]
 file=/run/supervisord.sock
 chmod=0700
@@ -52,9 +52,9 @@ EOF
 
 __main() {
 
-	__release
-	__supervisord
-	exec supervisord
+  __release
+  __supervisord
+  exec supervisord
 
 }
 

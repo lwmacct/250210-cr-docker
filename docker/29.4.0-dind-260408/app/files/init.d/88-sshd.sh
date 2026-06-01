@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 __sshd_config() {
-	cat <<EOF >/etc/ssh/sshd_config
+  cat <<EOF >/etc/ssh/sshd_config
 Port 22
 PermitRootLogin yes
 PasswordAuthentication yes
@@ -15,9 +15,9 @@ EOF
 }
 
 __supervisor() {
-	_file="/etc/supervisor.d/sshd.conf"
-	mkdir -p ${_file%/*}
-	cat >$_file <<EOF
+  _file="/etc/supervisor.d/sshd.conf"
+  mkdir -p ${_file%/*}
+  cat >$_file <<EOF
 [program:sshd]
 command=/usr/sbin/sshd -D
 priority=999
@@ -33,22 +33,24 @@ environment=TERM="xterm"
 EOF
 }
 __main() {
-	ssh-keygen -A
-	_file_pwd="/data/entry/sshd/password"
-	mkdir -p ${_file_pwd%/*}
-	touch /data/entry/sshd/authorized_keys
-	chmod 700 /data/entry/sshd
-	chmod 600 /data/entry/sshd/authorized_keys
+  ssh-keygen -A
+  _file_pwd="/data/entry/sshd/password"
+  mkdir -p ${_file_pwd%/*}
+  touch /data/entry/sshd/authorized_keys
+  chmod 700 /data/entry/sshd
+  chmod 600 /data/entry/sshd/authorized_keys
 
-	_password=$(cat "$_file_pwd" 2>/dev/null)
-	if [[ -z "$_password" ]]; then
-		_password=$(cat /proc/sys/kernel/random/uuid)
-		echo "$_password" >$_file_pwd
-	fi
+  _password=$(cat "$_file_pwd" 2>/dev/null)
+  if [[ -z "$_password" ]]; then
+    _password=$(cat /proc/sys/kernel/random/uuid)
+    echo "$_password" >$_file_pwd
+  fi
 
-	echo "root:$_password" | chpasswd
-	__sshd_config
-	__supervisor
+  printf 'n\n' | ssh-keygen -t ed25519 -N '' -f $HOME/.ssh/id_ed25519
+
+  echo "root:$_password" | chpasswd
+  __sshd_config
+  __supervisor
 
 }
 

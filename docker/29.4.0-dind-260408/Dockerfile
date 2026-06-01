@@ -10,7 +10,7 @@ RUN set -eux; \
     echo "安装常用软件"; \
     sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories; \
     apk add --no-cache \
-        busybox-extras openssh-server supervisor tini bash jq bc curl wget rsync vim sudo tzdata socat iproute2 tmux skopeo \
+        busybox-extras openssh-server supervisor tini bash jq bc curl wget rsync vim sudo tzdata socat iproute2 tmux skopeo perl-utils \
         findutils coreutils procps tar grep sed gawk dcron tzdata;
 
 RUN set -eux; \

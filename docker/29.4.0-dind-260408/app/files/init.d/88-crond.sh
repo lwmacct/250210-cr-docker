@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 __main() {
-	_file="/etc/supervisor.d/crond.conf"
-	mkdir -p ${_file%/*}
-	cat >$_file <<EOF
+  _file="/etc/supervisor.d/crond.conf"
+  mkdir -p ${_file%/*}
+  cat >$_file <<EOF
 [program:crond]
 command=crond -f -L /dev/stdout
 priority=999
