@@ -46,7 +46,7 @@ __main() {
     echo "$_password" >$_file_pwd
   fi
 
-  printf 'n\n' | ssh-keygen -t ed25519 -N '' -f $HOME/.ssh/id_ed25519
+  printf 'n\n' | ssh-keygen -t ed25519 -N '' -f /root/.ssh/id_ed25519
 
   echo "root:$_password" | chpasswd
   __sshd_config
