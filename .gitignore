@@ -1,4 +1,6 @@
-# 本地环境
+# .gitignore
+
+# 运行环境
 **/.DS_Store
 **/.local/
 **/.venv/
@@ -10,10 +12,19 @@
 **/tsconfig.tsbuildinfo
 
 # 构建输出
-**/bin/
-**/dist/
-**/build/
-**/*.vsix
+bin-*
+bin/
+dist/
+build/
+out/
+.next/
+*.vsix
+[0-9]*-
+
+# 生成文件
+**/gen/
+**/__pycache__/
+**/*.py[cod]
 
 # 临时文件
 **/*.bak
@@ -30,9 +41,6 @@ logs/**
 temp/**
 cache/**
 
-# 生成文件
-gen/
-
 # secret files
 .env
 .env.*
@@ -40,5 +48,8 @@ gen/
 config/config.yaml
 
 # AI tools
-.claude
 .playwright-mcp
+
+# Go workspace
+go.work
+go.work.sum

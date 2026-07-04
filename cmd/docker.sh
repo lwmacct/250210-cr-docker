@@ -2,20 +2,20 @@
 
 __main() {
 
-	{
-		_proxy="ghcr.nju.edu.cn/"
-		_proxy="1181.s.kuaicdn.cn:11818/"
-		_image1="${_proxy}ghcr.io/lwmacct/250210-cr-docker:29.4.0-dind-260408"
-		_image2="$(docker images -q $_image1)"
-		if [[ "$_image2" == "" ]]; then docker pull $_image1 && _image2="$(docker images -q $_image1)"; fi
-	}
+  {
+    _proxy="ghcr.nju.edu.cn/"
+    _proxy="1181.s.kuaicdn.cn:11818/"
+    _image1="${_proxy}ghcr.io/lwmacct/250210-cr-docker:latest"
+    _image2="$(docker images -q $_image1)"
+    if [[ "$_image2" == "" ]]; then docker pull $_image1 && _image2="$(docker images -q $_image1)"; fi
+  }
 
-	_pro_data="/zfs/lwm/4444-test"
-	_pro_name="$(echo "$_pro_data" | awk -F/ '{print $NF}')"
-	_pro_ip="172.22.$(echo "$_pro_data" | grep -oE '[0-9]{4}' | sed 's/\(..\)\(..\)/\1.\2/; s/0\([0-9]\)/\1/g')"
-	_pro_mac=$(echo "$_pro_ip" | md5sum | sed 's/^/88/; s/\(..\)/\1:/g; s/.$//' | cut -d: -f1-6)
-	_limit_cores=$(echo "$(nproc) * 0.6" | bc)
-	cat <<EOF | docker compose -p "$_pro_name" -f - up -d --remove-orphans
+  _pro_data="/zfs/lwm/4444-test"
+  _pro_name="$(echo "$_pro_data" | awk -F/ '{print $NF}')"
+  _pro_ip="172.22.$(echo "$_pro_data" | grep -oE '[0-9]{4}' | sed 's/\(..\)\(..\)/\1.\2/; s/0\([0-9]\)/\1/g')"
+  _pro_mac=$(echo "$_pro_ip" | md5sum | sed 's/^/88/; s/\(..\)/\1:/g; s/.$//' | cut -d: -f1-6)
+  _limit_cores=$(echo "$(nproc) * 0.6" | bc)
+  cat <<EOF | docker compose -p "$_pro_name" -f - up -d --remove-orphans
 services:
   docker:
     container_name: $_pro_name
@@ -45,7 +45,7 @@ EOF
 }
 
 __help() {
-	cat <<EOF
+  cat <<EOF
 
 EOF
 }
