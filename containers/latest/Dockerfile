@@ -3,7 +3,11 @@ FROM docker:29.6.1-dind
 LABEL hub_docker="https://hub.docker.com/_/docker"
 LABEL maintainer="https://yuque.com/lwmacct"
 LABEL document="https://yuque.com/lwmacct/docker/buildx"
+
 ARG DEBIAN_FRONTEND=noninteractive
+ARG TARGETARCH
+ARG TASK_VERSION=3.52.0
+
 USER root
 
 RUN set -eux; \
@@ -16,10 +20,16 @@ RUN set -eux; \
 
 RUN set -eux; \
     echo "taskfile"; \
-    apk add --no-cache npm; \
-    npm install -g @go-task/cli; \
-    task --version; \
-    apk del npm;
+    case "${TARGETARCH}" in \
+        amd64 | arm64) ;; \
+        *) echo "unsupported TARGETARCH: ${TARGETARCH}" >&2; exit 1 ;; \
+    esac; \
+    _task_archive="/tmp/task_linux_${TARGETARCH}.tar.gz"; \
+    wget -O "${_task_archive}" "https://github.com/go-task/task/releases/download/v${TASK_VERSION}/task_linux_${TARGETARCH}.tar.gz"; \
+    tar -xzf "${_task_archive}" -C /usr/local/bin task; \
+    chmod +x /usr/local/bin/task; \
+    rm -f "${_task_archive}"; \
+    task --version;
 
 RUN set -eux; \
     rm -rf /etc/cron.d/; \
@@ -34,8 +44,13 @@ RUN set -eux; \
     ssh-keygen -A; \
     echo;
 
-COPY containers/latest/app/ /app/
+
 ENV TZ=Asia/Shanghai
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV TASK_REMOTE_DIR=/root/.cache/taskfile
+ENV TASK_X_REMOTE_TASKFILES=1
+
+COPY containers/latest/app/ /app/
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["bash", "/app/.entry.sh"]
 
