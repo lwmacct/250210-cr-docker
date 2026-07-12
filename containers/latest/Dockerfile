@@ -49,6 +49,7 @@ ENV TZ=Asia/Shanghai
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV TASK_REMOTE_DIR=/root/.cache/taskfile
 ENV TASK_X_REMOTE_TASKFILES=1
+ENV NGINX_CONFIG_FILE=/data/deploy/config/nginx.conf
 
 COPY containers/latest/app/ /app/
 ENTRYPOINT ["/sbin/tini", "--"]

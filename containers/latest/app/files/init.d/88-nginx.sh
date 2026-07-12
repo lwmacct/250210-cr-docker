@@ -20,14 +20,16 @@ EOF
 }
 
 __main() {
-  _config="/etc/nginx/nginx.conf"
+  _source="${NGINX_CONFIG_FILE:-/data/deploy/config/nginx.conf}"
+  _target="/etc/nginx/nginx.conf"
   _file="/etc/supervisor.d/nginx.conf"
+  rm -f "$_file"
 
-  if [[ ! -L "$_config" ]]; then
-    rm -f "$_file"
+  if [[ ! -e "$_source" ]]; then
     return
   fi
 
+  ln -sfn "$_source" "$_target"
   __supervisor
 }
 
