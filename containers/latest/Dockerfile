@@ -12,11 +12,10 @@ USER root
 
 RUN set -eux; \
     echo "安装常用软件"; \
-    sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories; \
     apk add --no-cache \
         busybox-extras openssh-server supervisor tini bash jq bc curl wget rsync vim sudo tzdata socat iproute2 tmux skopeo perl-utils \
         findutils coreutils procps tar grep sed gawk dcron tzdata \
-        nginx nginx-mod-stream nginx-mod-http-lua lua-resty-http;
+        redis nginx nginx-mod-stream nginx-mod-http-lua lua-resty-http;
 
 RUN set -eux; \
     echo "taskfile"; \
@@ -50,6 +49,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV TASK_REMOTE_DIR=/root/.cache/taskfile
 ENV TASK_X_REMOTE_TASKFILES=1
 ENV NGINX_CONFIG_FILE=/data/deploy/config/nginx.conf
+ENV REDIS_CONFIG_FILE=/data/deploy/config/redis.conf
 
 COPY containers/latest/app/ /app/
 ENTRYPOINT ["/sbin/tini", "--"]
