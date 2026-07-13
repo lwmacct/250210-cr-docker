@@ -15,7 +15,7 @@ RUN set -eux; \
     apk add --no-cache \
         busybox-extras openssh-server supervisor tini bash jq bc curl wget rsync vim sudo tzdata socat iproute2 tmux skopeo perl-utils \
         findutils coreutils procps tar grep sed gawk dcron tzdata \
-        redis nginx nginx-mod-stream nginx-mod-http-lua lua-resty-http;
+        nginx nginx-mod-stream nginx-mod-http-lua lua-resty-http;
 
 RUN set -eux; \
     echo "taskfile"; \
