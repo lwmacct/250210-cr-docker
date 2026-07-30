@@ -1,4 +1,4 @@
-FROM docker:29.6.1-dind
+FROM docker:29.6.2-dind
 
 LABEL hub_docker="https://hub.docker.com/_/docker"
 LABEL maintainer="https://yuque.com/lwmacct"
