@@ -13,9 +13,8 @@ USER root
 RUN set -eux; \
     echo "安装常用软件"; \
     apk add --no-cache \
-        busybox-extras openssh-server supervisor tini bash jq bc curl wget rsync vim sudo tzdata socat iproute2 tmux skopeo perl-utils \
-        findutils coreutils procps tar grep sed gawk dcron tzdata \
-        nginx nginx-mod-stream nginx-mod-http-lua lua-resty-http;
+        busybox-extras openssh-server sudo supervisor tini bash jq bc curl wget tree iproute2 perl-utils \
+        findutils coreutils procps tar grep sed gawk dcron tzdata socat tmux skopeo rsync vim;
 
 RUN set -eux; \
     echo "taskfile"; \
