@@ -1,4 +1,4 @@
-FROM docker:29.6.2-dind
+FROM docker:29.8.1-dind
 
 LABEL hub_docker="https://hub.docker.com/_/docker"
 LABEL maintainer="https://yuque.com/lwmacct"
@@ -6,7 +6,7 @@ LABEL document="https://yuque.com/lwmacct/docker/buildx"
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG TARGETARCH
-ARG TASK_VERSION=3.52.0
+ARG TASK_VERSION=3.53.1
 
 USER root
 
