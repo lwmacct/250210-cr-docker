@@ -37,7 +37,7 @@ RUN set -eux; \
     ln -sfn /data/entry/sshd /root/.ssh; \
     mkdir -p /etc/supervisor.d; \
     cat /etc/supervisord.conf > /etc/supervisord.conf.bak; \
-    chmod -x /usr/sbin/zfs; \
+    if [ -x /usr/sbin/zfs ]; then chmod -x /usr/sbin/zfs; fi; \
     cp -af /etc/ssh /etc/ssh.bak; \
     ssh-keygen -A; \
     echo;
